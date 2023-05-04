@@ -61,6 +61,25 @@
 </head>
 <body>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Parking</th>
+      <th scope="col">Vote</th>
+      <th scope="col">Distance to center</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php for ($i = 0; $i < count($hotels); $i++){
+        $cur_hotel = $hotels[$i];
+        ?>
+        <?php
+         echo "<tr><td>{$cur_hotel['name']}</td> <td>{$cur_hotel['description']}</td> <td>{$cur_hotel['parking']}</td> <td>{$cur_hotel['vote']}</td> <td>{$cur_hotel['distance_to_center']} </td></tr>";
+            ?>
+        <?php } ?>
+    </table>
 
 
     
