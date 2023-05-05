@@ -63,14 +63,7 @@
             }
         }
         $filtered_hotels = $temp_hotels;
-
-
-
     }
-
-
-
-
 ?>
 
 
@@ -92,13 +85,12 @@
         <option value="1">With parking</option>
     </select>
     <button type="submit" class="btn btn-primary">Filtra</button>
+    <div>
+        <label for="vote">Voto</label>
+        <input type="number" id="vote" name="vote" max="5" min="0">
+        <button type="submit" class="btn btn-primary">Filtra</button>
+    </div>
 </form>
-<div>
-    <label for="vote">Voto</label>
-    <input type="number" id="vote" name="vote" max="5" min="0">
-
-    <button type="submit" class="btn btn-primary">Filtra</button>
-</div>
 
 
 
