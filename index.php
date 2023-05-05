@@ -40,12 +40,36 @@
 
     ];
 
-    for ($i = 0; $i < count($hotels); $i++) {
-        $cur_hotel = $hotels[$i];
-        
-        // Template literal
-        echo "<div>Hotel: {$cur_hotel['name']} {$cur_hotel['description']} {$cur_hotel['parking']} {$cur_hotel['vote']} {$cur_hotel['distance_to_center']} </div>";
+    $filtered_hotels = $hotels;
+
+    if (isset($_GET["parking"]) && $_GET["parking"] === "1"){
+        $parking = $_GET["parking"];
+        $temp_hotels = [];
+
+        foreach($filtered_hotels as $hotel){
+            if($hotel["parking"]){
+                $temp_hotels[] = $hotel;
+            }
+        }
+
+        $filtered_hotels = $temp_hotels;
+    };
+
+    if(isset($_GET["vote"]) && $_GET["vote"] !== ""){
+        $temp_hotels = [];
+        foreach($filtered_hotels as $hotel){
+            if($hotel["vote"] >= $_GET["vote"]){
+                $temp_hotels[] = $hotel;
+            }
+        }
+        $filtered_hotels = $temp_hotels;
+
+
+
     }
+
+
+
 
 ?>
 
@@ -61,6 +85,23 @@
 </head>
 <body>
 
+<form action="index.php" method="GET">
+    <label for="parking">Parcheggio</label>
+    <select name="parking" id="parking">
+        <option value="">All</option>
+        <option value="1">With parking</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Filtra</button>
+</form>
+<div>
+    <label for="vote">Voto</label>
+    <input type="number" id="vote" name="vote" max="5" min="0">
+
+    <button type="submit" class="btn btn-primary">Filtra</button>
+</div>
+
+
+
 <table class="table">
   <thead>
     <tr>
@@ -72,18 +113,13 @@
     </tr>
   </thead>
   <tbody>
-    <?php for ($i = 0; $i < count($hotels); $i++){
-        $cur_hotel = $hotels[$i];
-        ?>
+    <?php for ($i = 0; $i < count($filtered_hotels); $i++){
+        $cur_hotel = $filtered_hotels[$i]; ?>
         <?php
-         echo "<tr><td>{$cur_hotel['name']}</td> <td>{$cur_hotel['description']}</td> <td>{$cur_hotel['parking']}</td> <td>{$cur_hotel['vote']}</td> <td>{$cur_hotel['distance_to_center']} </td></tr>";
-            ?>
+         echo "<tr><td>{$cur_hotel['name']}</td> <td>{$cur_hotel['description']}</td> <td>{$cur_hotel['parking']}</td> <td>{$cur_hotel['vote']}</td> <td>{$cur_hotel['distance_to_center']}</td></tr>";
+        ?>
         <?php } ?>
     </table>
-
-
-    
-
 
 
 
